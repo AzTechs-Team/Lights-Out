@@ -1,0 +1,27 @@
+{
+  "name": "lights-out",
+  "version": "1.0.0",
+  "description": "A discord bot.",
+  "main": "src/bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bot": "nodemon src/bot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AzTechs-Team/Lights-Out.git"
+  },
+  "author": "Aztechs-Team",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/AzTechs-Team/Lights-Out/issues"
+  },
+  "homepage": "https://github.com/AzTechs-Team/Lights-Out#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "colors": "^1.4.0",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "googleapis": "^67.0.0"
+  }
+}
