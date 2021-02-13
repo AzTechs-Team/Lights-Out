@@ -8,7 +8,7 @@ const client = new Client({
     partials: ['MESSAGE', 'REACTION']
 });
 
-const PREFIX = "##";
+const PREFIX = "#";
 
 // Includes
 const hello = require('./commands/hello');

@@ -12,39 +12,45 @@ class LightsOn{
 
     questions() {
         let i = 0
-        let profileList = ['intro','name', 'age', 'preferences', 'bio', 'relationship', 'song',
+        let profileList = ['intro','name', 'age', 'preferences', 'age-range','bio', 'relationship', 'song',
             'pizza', 'superhero', 'food', 'language', 'philosophy', 'software']
         let tempInfo = []
         const tempId = this.id;
-        this.client.on('message', function toBeClosed(msg) {
-            if (msg.author.id === tempId)
-            {
+        const tempClient = this.client;
+        tempClient.on('message', async function toBeClosed(msg) {
+            try{
                 if (msg.author.bot === true) return;
-                if (i <= 12) {
-                    msg.author.send(questionsList[i])
-                    let key = profileList[i];
-                    tempInfo.push({ [key]: msg.content });
-                    console.log(tempInfo)
+                if (msg.author.id === tempId)
+                {   
+                    if(i === 0 && msg.content != 'yes') {
+                            msg.author.send('Update some other time!')
+                            try{
+                                tempClient.removeListener('message', toBeClosed);
+                                console.log('done');
+                            }catch(err){console.log(`didnt close : ${err}`);}
+                    }
+                    else if (i < profileList.length || msg.content === 'yes') {
+                        try{ await msg.author.send(questionsList[i])}catch(err){console.log(err);}
+                        let key = profileList[i];
+                        tempInfo.push({ [key]: msg.content });
+                        console.log(tempInfo[i]);
+                        if (i == profileList.length-1) {
+                            console.log('close', i)
+                            try{
+                                tempClient.removeListener('message', toBeClosed);
+                                console.log('done');
+                            }catch(err){console.log(`didnt close : ${err}`);}
+                            console.log(tempInfo);
+                            return;
+                        }
+                        i += 1;
+                    }
                 }
-                if (i == profileList.length) {
-                    console.log('close', i)
-                    this.client.removeListener('message', toBeClosed);
-                    console.log(tempInfo)
-                }
-                i += 1;
-            }
-            
+        }catch(err){console.log(err);}
         }) 
         
         
     }
 }
-
-// module.exports = (message,client) => {
-//     const author = new LightsOn(message, client);
-//     author.send();
-//     author.fun();
-//     //    client.on('message', (messageAuthor))
-// };
 
 module.exports = LightsOn;
