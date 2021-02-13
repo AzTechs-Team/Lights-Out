@@ -18,10 +18,12 @@
   },
   "homepage": "https://github.com/AzTechs-Team/Lights-Out#readme",
   "dependencies": {
+    "async": "^3.2.0",
     "axios": "^0.21.1",
     "colors": "^1.4.0",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "googleapis": "^67.0.0"
+    "googleapis": "^67.0.0",
+    "pg": "^8.5.1"
   }
 }
