@@ -2,13 +2,18 @@
 require('dotenv').config();
 const colors = require('colors');
 const axios = require('axios');
-const { Client, ReactionCollector, MessageEmbed } = require('discord.js');
+const { Client, ReactionCollector } = require('discord.js');
 
 const client = new Client({
     partials: ['MESSAGE', 'REACTION']
 });
 
 const PREFIX = "#";
+
+// Includes
+const hello = require('./commands/hello');
+const help = require('./commands/help');
+const lightson = require('./commands/lightson');
 
 client.on('ready', () => {
     console.log(`${client.user.username} has logged in!`);
@@ -30,7 +35,15 @@ client.on('message', (message) => {
         .split(/\s+/);
     switch(CMD_NAME){
         case "hello" : {
-            message.channel.send('Hello there!');
+            hello(message, client);
+        }
+        break;
+        case "lightson" : {
+            message.author.send('lights on');
+        }
+        break;
+        case "help" : {
+            help(message);
         }
         break;
     }
