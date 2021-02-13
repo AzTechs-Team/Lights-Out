@@ -1,8 +1,9 @@
 [
     "What's your name??",
     "What's your age??",
-    "what's your age preference? if you're 18 and want to date someone ±2 your age preference eg: 18",
+    "What your Gender?",
     "What are your preferences for you significant other(Male,Female,other)?",
+    "what's your age preference? if you're 18 and want to date someone ±2 your age preference eg: 18",
     "Write a short bio to introduce yourself!",
     "One night stand or serious relationships",
     "romantic songs or death metal",
@@ -11,5 +12,6 @@
     "Cereal before milk",
     "javascript or java",
     "would you rather implode or explode",
-    "apple vs android"
+    "apple vs android",
+    "Hey! your profile was set! Thanks."
 ]

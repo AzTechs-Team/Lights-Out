@@ -26,7 +26,7 @@ client.on('ready', () => {
     });
 })
 
-client.on('message', (message) => {
+client.on('message', async (message) => {
     if(message.author.bot === true) return;
     if(message.content.startsWith(PREFIX)){
         const [CMD_NAME, ...args] = message.content
@@ -39,19 +39,20 @@ client.on('message', (message) => {
         }
         break;
         case "lightson": {
-            console.log('here')
             message.author.send("Do you want to get matched up?\nLet's start by setting up your profile!!");
             var lightsOnClass = new LightsOn(client,message.author,message.author.id);
             
-            // LightsOn(message, client);
-            
-            lightsOnClass.questions()
+            lightsOnClass.questions();
+           
         }
         break;
         case "help" : {
             help(message);
         }
         break;
+        case "temp" : {
+
+        }
     }
 }})
 
