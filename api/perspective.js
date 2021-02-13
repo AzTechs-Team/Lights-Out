@@ -12,7 +12,7 @@ DISCOVERY_URL =
       const client = await google.discoverAPI(DISCOVERY_URL);
       const analyzeRequest = {
         comment: {
-          text: "do you want to make out?",
+          text: comment,
         },
         requestedAttributes: {
           // PROFANITY: {},
@@ -26,7 +26,6 @@ DISCOVERY_URL =
         resource: analyzeRequest,
       });
       let data = response.data.attributeScores;
-      let a;
       return Object.values(data).map(level => level.summaryScore.value);
 }
 
