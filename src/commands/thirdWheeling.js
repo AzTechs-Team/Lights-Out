@@ -1,11 +1,11 @@
 const prespective = require('../../api/perspective')
-const {less,medium,high,awk} = require('../comment');
+const { less, medium, high, awk } = require('../comment');
 
 module.exports = (client) => {
     const data_ = [];
     const time_ = []
     let avg = 0;
-    client.on('message', function toBeClosed (message){
+    client.on('message', function toBeClosed(message) {
         if (message.author.bot === true) return;
         prespective(message.content).then(data => {
             const t = data[0];
@@ -26,21 +26,15 @@ module.exports = (client) => {
                         } else if (avg > .5) {
                             message.channel.send(awk[rand])
                         }
-                    } else {
-                        console.log('working')
-                        time_.push(1);
                     }
                 } catch (error) {
                     console.log('fuck this error')
                 }
-               
-                
-            }, 5000);
-            if (time_.length >= 1) {
-                console.log('done')
-                client.removeListener('message', toBeClosed);
-            }
-           
+
+
+            }, 2000);
+
+
         })
             .catch(error => {
                 console.log(`ERROR: ${error}`);
