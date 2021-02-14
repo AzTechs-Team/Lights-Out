@@ -39,7 +39,7 @@ client.on('message', async (message) => {
         }
         break;
         case "lightson": {
-            message.author.send("Do you want to get matched up?\nLet's start by setting up your profile!!");
+            message.author.send("Do you want to get matched up?\nWant to start setting up your profile?(Yes/No)");
             var lightsOnClass = new LightsOn(client,message.author,message.author.id);
             
             lightsOnClass.questions();

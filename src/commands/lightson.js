@@ -1,6 +1,8 @@
-const { DMChannel,Client, User, Message } = require("discord.js");
+const { DMChannel, Client, User, Message } = require("discord.js");
+const { v4: uuidv4 } = require('uuid');
 const profile = require('../../DB/profileSchema');
 const questionsList = require('../questions.json');
+const setUserInfo = require('../../DB/setUserInfo')
 
 let tempInfo = [];
 
@@ -19,7 +21,7 @@ class LightsOn{
         }
         this.questions = () => {
                 let i = 0
-                let profileList = ['intro','name','gender', 'age', 'preferences', 'agerange','bio', 'relationship', 'song',
+                let profileList = ['intro','name','age', 'gender', 'preferences', 'agerange','bio', 'relationship', 'song',
                     'pizza', 'superhero', 'food', 'language', 'philosophy', 'software']
                 //let tempInfo = []
                 let temp = [];
@@ -51,7 +53,7 @@ class LightsOn{
                                         //console.log("intro: ",tempInfo[0].intro);
 
                                         console.log(typeof tempInfo);
-                                        dataoutput(tempInfo);
+                                        dataoutput(tempInfo,tempId);
                                             
                                     }catch(err){console.log(`didnt close : ${err}`);}
                                     //console.log(tempInfo);
@@ -112,11 +114,18 @@ class LightsOn{
     // }
 }
 
-function dataoutput(tempInfo) {
+function dataoutput(tempInfo,id) {
+    tempInfo.push({ id: uuidv4() })
+    tempInfo.push({ userdiscordid:id})
     console.log(tempInfo, 'asd');
     let arr = tempInfo;
     const object_ = Object.assign({}, ...arr);
     console.log(object_);
+    console.log(id)
+    //add user to database
+    setUserInfo(object_);
+
+    //
 }
 
 module.exports = LightsOn;
