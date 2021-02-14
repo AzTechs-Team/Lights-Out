@@ -2,11 +2,12 @@ var pg = require("pg");
 var async = require("async");
 const config = require('./config');
 
-
-const getMatches =async (info) => {
+let info = '547152349085302829';
+let userdata;
+const getMatches = (info) => {
     var pool = new pg.Pool(config);
     
-    pool.connect(function (err, client, done) {
+    let data = pool.connect(function (err, client, done) {
         var finish = function () {
             done();
             process.exit();
@@ -16,13 +17,19 @@ const getMatches =async (info) => {
             console.error("Error connecting to the CockroachDB", err);
             finish();
         }
-        const rangeLower = info.age - info.agerange;
-        const rangeUpper = info.age + info.agerange;
         
         async.waterfall(
-            [
-                function (next) {
-                    var query = `SELECT * FROM users WHERE gender='${info.preferences}' AND age>=${rangeLower} AND age<=${rangeUpper};`;
+            [   function (next) {
+                    var query = `SELECT * FROM users WHERE userdiscordid=${info};`;
+                    client.query(query, next);
+                },
+                function (results, next) {
+                    
+                    userdata= results.rows[0];
+                    //console.log(results.rows[0]);
+                    const rangeLower = userdata.age - userdata.agerange;
+                    const rangeUpper = userdata.age + userdata.agerange;
+                    var query = `SELECT * FROM users WHERE gender='${userdata.preferences}' AND age>=${rangeLower} AND age<=${rangeUpper};`;
                     client.query(query, next);
                 },
             ],
@@ -32,6 +39,7 @@ const getMatches =async (info) => {
                     finish();
                 }
                 let count = []
+                console.log(results.rows.length);
                 results.rows.forEach(person => {
                     // console.log(person)
                     let x = 0;
@@ -52,13 +60,16 @@ const getMatches =async (info) => {
                     if (person.software == info.software)
                         x += 1;
                     // console.log(count)
-                    count.push([person.id, x])
+                    count.push([person, x])
                 })
-                count.sort((a, b) => a[1] - b[1])
-                count = count.slice(0, 3);
-                // console.log('ending',count)
-                finish();
-                return await count;
+                // count.sort((a, b) => a[1] - b[1])
+                // count = count.slice(0, 3);
+                // count = count.reverse();
+                // console.log('ending',count);
+                // fun(count);
+                // return count;
+                //finish();
+                //count;
             }
         );
         
@@ -93,6 +104,14 @@ const getMatches =async (info) => {
     //             })
     //     }).catch((err)=>console.log(err))
     });
+    return data;
+}
+
+
+function fun(args){
+    console.log(args);
 }
 
 module.exports = getMatches;
+
+getMatches(info);

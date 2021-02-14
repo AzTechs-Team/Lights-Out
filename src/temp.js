@@ -20,7 +20,8 @@ const info = {
     gender: 'male'
 }
 
-console.log(getMatches(info))
+console.log(getMatches(info));
+//const arr = fun();
 // async function callAsync() {
 //     var x = await getMatches(info);
 //     console.log(x);
