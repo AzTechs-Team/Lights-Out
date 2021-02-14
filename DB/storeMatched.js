@@ -8,15 +8,14 @@ const fun = (value) => {
     console.log(value,'here');
 }
 
-const storeMatched = async() => {
-    let id = '547152349085302829'
-    let matchedId = '628480864392708096'
-    console.log(id,matchedId)
+const storeMatched = async(id,matchedId) => {
+    // let id = '547152349085302829'
+    // let matchedId = '628480864392708096'
+    // console.log(id,matchedId)
     var pool = new pg.Pool(config);
     pool.connect(async function (err, client, done) {
         var finish = function () {
             done();
-            process.exit();
         };
 
         if (err) {

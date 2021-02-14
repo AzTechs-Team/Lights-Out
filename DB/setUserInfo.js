@@ -8,7 +8,6 @@ const setUserInfo = (info) => {
     pool.connect(function (err, client, done) {
         var finish = function () {
             done();
-            process.exit();
         };
 
         if (err) {
