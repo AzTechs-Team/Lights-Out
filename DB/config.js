@@ -8,7 +8,7 @@ var config = {
     database: "wild-impala-668.lights_out",
     port: 26257,
     ssl: {
-        ca:fs.readFileSync('./certs/cc-ca.crt.txt').toString()
+        ca: 'xasd'
     }
 };
 
